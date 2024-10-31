@@ -36,7 +36,6 @@
             this.kiraTarihi = new System.Windows.Forms.DateTimePicker();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnRentABook = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
@@ -122,16 +121,6 @@
             this.btnRentABook.UseWaitCursor = true;
             this.btnRentABook.Click += new System.EventHandler(this.btnRentABook_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 214);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 16);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "label4";
-            this.label4.UseWaitCursor = true;
-            // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
@@ -148,7 +137,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1747, 647);
             this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnRentABook);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.kiraTarihi);
@@ -176,7 +164,6 @@
         private System.Windows.Forms.DateTimePicker kiraTarihi;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btnRentABook;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox2;
     }
 }

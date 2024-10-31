@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace LibraryManagement
@@ -59,45 +60,64 @@ namespace LibraryManagement
                 {
                     string satir;
 
-                    // DataBase dosyasındaki satırlar dolaşılır satırın null olması dosyanın sonunda olduğu anlamına gelir
+                    //DataBase dosyasındaki her bir null olmayan satırı gezer
+                    // DataBase dosyasındaki satırın null olması dosyanın sonunda olduğu anlamına gelir
                     while ((satir = sr.ReadLine()) != null)
                     {
+                        //DataBase dosyasındaki satırda kiralama tarihi alınır
                         DateTime tarih = Convert.ToDateTime(satir.Substring(satir.IndexOf('+')+1, 10));
+                        //[string].SubString(req int startIndex, int length) methodu bir metin içindeki bir kesiti alır
+                        // Tavsiye edilen kullanımı: 2 parametre (başlangıç indisi) ile (uzunluk değeri) kullanımıdır
+                        //[string].IndexOf() methodu bir metin içerisinde parametre ile istenen karakteri bularak metin içerisindeki indisini döndürür.
+
+
+                        //Kştap kiralandıktan sonra kaç gün geçmiş hesabı yapılır
                         TimeSpan kiraGunSayisi = tarih - Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
                         double fark = Math.Abs(Convert.ToInt32(kiraGunSayisi.TotalDays));
+
+                        //ceza hesabı ilk 15 günden sonra yapılır
                         if (fark>15)
                         {
+                            //kitap 15 gün ile 45 gün arasında teslim edilmemişse ₺15 ceza tutarı
                             if (fark > 15 && fark < 45) { cezaTutari = 15; }
+
+                            //kitap 45 günden fazla teslim edilmemişse 45 günden sonraki her gün için ₺1(yalnız bir Türk Lirası) cezai işlem uygulanır
                             else { cezaTutari = 15 + (fark - 45); }
+
+                            //cezaya düşen kitap kiraları listBox2 adındaki listeye yazdırılır
                             listBox2.Items.Add($"!! {satir}\t\tCeza Tutarı:₺{cezaTutari}");
                         }
-                        label4.Text = fark.ToString();
+                        
                         satir = satir.Replace('+',' ');
                         listBox1.Items.Add(satir);
                     }
                 }
             }
+            //dosya okumada veya veri çekerken oluşabilecek hataları yönetebilmek için catch bloğu kullanılabilir
             catch (Exception ex)
             {
-                label4.Text = "Bir hata oluştu: " + ex.Message;
             }
         }
 
         private void btnRentABook_Click(object sender, EventArgs e)
         {
+            //data değişkeni Arayüzden alınan [Kullanıcı Adı], [Kitap Adı] ve [Kitabın kiralandığı tarih(gün/ay/yıl)] verilerini tutar.
             string data = $"{tbxUserName.Text}\t\t{tbxBookName.Text}\t\t+{kiraTarihi.Value.ToString("dd/MM/yyyy")}";
+
             try
             {
-                using (StreamWriter sw = new StreamWriter(dosyaYolu,append:true))
+                //StreamWriter ile DataBase dosyası açılır 
+                using (StreamWriter sw = new StreamWriter(path:dosyaYolu,append:true))
                 {
+                    //data DataBase e gönderilir
                     sw.WriteLine(data);
                 }
-                label4.Text="Veri başarıyla kaydedildi.";
             }
             catch (Exception ex)
             {
-                label4.Text = "Bir hata oluştu: " + ex.Message;
             }
+
+            //Veri Kaydı yapıldıktan sonra Tablolar güncellenir
             loadLogs();
         }
     }

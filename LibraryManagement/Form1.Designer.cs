@@ -49,6 +49,7 @@
             this.label1.Size = new System.Drawing.Size(159, 42);
             this.label1.TabIndex = 0;
             this.label1.Text = "Üye Adı:";
+            this.label1.UseWaitCursor = true;
             // 
             // label2
             // 
@@ -59,6 +60,7 @@
             this.label2.Size = new System.Drawing.Size(177, 42);
             this.label2.TabIndex = 1;
             this.label2.Text = "Kitap Adı:";
+            this.label2.UseWaitCursor = true;
             // 
             // label3
             // 
@@ -69,6 +71,7 @@
             this.label3.Size = new System.Drawing.Size(367, 42);
             this.label3.TabIndex = 2;
             this.label3.Text = "Kitabın Alındığı Tarih:";
+            this.label3.UseWaitCursor = true;
             // 
             // tbxUserName
             // 
@@ -77,6 +80,7 @@
             this.tbxUserName.Name = "tbxUserName";
             this.tbxUserName.Size = new System.Drawing.Size(315, 49);
             this.tbxUserName.TabIndex = 3;
+            this.tbxUserName.UseWaitCursor = true;
             // 
             // tbxBookName
             // 
@@ -85,6 +89,7 @@
             this.tbxBookName.Name = "tbxBookName";
             this.tbxBookName.Size = new System.Drawing.Size(315, 49);
             this.tbxBookName.TabIndex = 4;
+            this.tbxBookName.UseWaitCursor = true;
             // 
             // kiraTarihi
             // 
@@ -93,6 +98,7 @@
             this.kiraTarihi.Name = "kiraTarihi";
             this.kiraTarihi.Size = new System.Drawing.Size(315, 49);
             this.kiraTarihi.TabIndex = 5;
+            this.kiraTarihi.UseWaitCursor = true;
             // 
             // listBox1
             // 
@@ -102,6 +108,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(925, 388);
             this.listBox1.TabIndex = 6;
+            this.listBox1.UseWaitCursor = true;
             // 
             // btnRentABook
             // 
@@ -112,6 +119,7 @@
             this.btnRentABook.TabIndex = 7;
             this.btnRentABook.Text = "Kitap Kirala";
             this.btnRentABook.UseVisualStyleBackColor = true;
+            this.btnRentABook.UseWaitCursor = true;
             this.btnRentABook.Click += new System.EventHandler(this.btnRentABook_Click);
             // 
             // label4
@@ -122,6 +130,7 @@
             this.label4.Size = new System.Drawing.Size(44, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "label4";
+            this.label4.UseWaitCursor = true;
             // 
             // listBox2
             // 
@@ -131,6 +140,7 @@
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(785, 388);
             this.listBox2.TabIndex = 9;
+            this.listBox2.UseWaitCursor = true;
             // 
             // Form1
             // 
@@ -149,6 +159,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

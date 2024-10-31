@@ -1,23 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LibraryManagement
 {
     public partial class Form1 : Form
     {
-        string dosyaYolu = "deneme.txt";
-        double cezaTutari;
+        // verilerin kayıt edileceği dosyanın yolunu ekliyorum
+        // LibraryManagement proje klasörü içerisinde .sln dosyasının yanına DataBase.txt dosyasına verilerimizi kaydediyoruz.
+        string dosyaYolu = "../../../DataBase.txt";
 
-        KiraBilgisi[] kiraBilgisis = { new KiraBilgisi{} };
 
         public Form1()
         {
@@ -27,18 +19,47 @@ namespace LibraryManagement
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Form1 yüklendiği anda loadLogs methodu çağırıyorum
+            // Bu method veritabanı dosyasını okur
+            // dosyada veri var ise listeler
             loadLogs();
         }
 
         private void loadLogs()
         {
+
+            /*
+            
+                Algoritma 
+                - Dosya açılır
+                - Dosyanın Her bir satırı okunur.
+                - Okunan satır içerisinde standart olarak belirlenmiş tarih verisinin olduğu kısım alınır.
+                - Kitabın kiralandığı günden itibaren geçen gün sayısı hesaplanır.
+                - kitap kiralandığı günden itibaren 15 günden fazla 45 günden az olmuş ise ₺15 ceza uygulanır.
+                - Kitap kiralandıktan sonra 45 günden daha fazla sürede teslim edilmediyse, 15TL ye ek olarak 45 günden sonraki her gün için 1 lira daha ceza yaılacak
+                - Ceza alan kişiler listBox2 adındaki listeye eklenecek 
+                - Ceza alsa da almasa da okunan satır listBox1 adındaki listeye eklenecek
+
+             */
+            //başlangıçta listbox lar içerisinde bellekte kalan veri var ise bunlar temizlenir
             listBox1.Items.Clear();
+            listBox2.Items.Clear();
+
+            
+            double cezaTutari;
+
+            //try - catch bloğu Hata yönetimi için kullanılan bloktur
+            // bu projede try - catch bloğu dosya okumada veya veri çekerken oluşabilecek hataları yönetebilmek için kullanılmıştır
             try
             {
+
+                // using yapısı garbage collector gibi çalışır
+                // Kullanılan nesne ile blok bittikten sonra bellekten silinerek bellek tasarrufu sağlanır
                 using (StreamReader sr = new StreamReader(dosyaYolu))
                 {
                     string satir;
-                    Console.WriteLine("Kaydedilen veriler:");
+
+                    // DataBase dosyasındaki satırlar dolaşılır satırın null olması dosyanın sonunda olduğu anlamına gelir
                     while ((satir = sr.ReadLine()) != null)
                     {
                         DateTime tarih = Convert.ToDateTime(satir.Substring(satir.IndexOf('+')+1, 10));
@@ -79,17 +100,6 @@ namespace LibraryManagement
             }
             loadLogs();
         }
-    }
-
-    class KiraBilgisi
-    {
-        public KiraBilgisi()
-        {
-            
-        }
-        public string userName { get; set; }
-        public string bookName { get; set; }
-        public DateTime kiraTarihi { get; set; }
     }
 
 }
